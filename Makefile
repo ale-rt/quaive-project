@@ -2,10 +2,10 @@
 
 all: .installed.cfg
 
-bin/buildout: bin/pip src/ploneintranet/requirements.txt
+bin/buildout: bin/pip2.7 src/ploneintranet/requirements.txt
 	./bin/pip install -IUr src/ploneintranet/requirements.txt
 
-bin/pip:
+bin/pip2.7:
 	virtualenv -p python2.7 --no-site-packages .
 
 checkout-ploneintranet:
