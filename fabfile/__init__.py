@@ -2,7 +2,7 @@
 from fabric import api
 
 
-def ploneintranet_robotserver():
+def robotserver():
     """ Run the ploneintranet robot server
     """
     with api.lcd("~/Code/plone/projects/quaive"):
