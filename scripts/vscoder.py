@@ -1,6 +1,7 @@
 # coding=utf-8
 from json import dumps
 
+import os
 import sys
 
 
@@ -20,8 +21,10 @@ CONF = {
         "**/parts": True,
         "**/var": True,
     },
+    "python.analysis.disabled": ["unresolved-import"],
     "python.pythonPath": sys.executable,
-    "python.linting.flake8Path": "/home/ale/Code/plone/projects/quaive/bin/flake8",
+    "python.linting.flake8Path": "{}/bin/flake8".format(os.getcwd()),
+    "python.linting.flake8Args": ["--ignore=E203,W503,Q000,C812"],
     "python.autoComplete.extraPaths": sorted(filter(None, set(sys.path))),
     "python.jediEnabled": False,
     "python.linting.pylintEnabled": False,
