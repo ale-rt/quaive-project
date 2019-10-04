@@ -1,0 +1,14 @@
+repos:
+-   repo: https://github.com/psf/black
+    rev: 19.3b0
+    hooks:
+    -   id: black
+        exclude: pre-commit/(.*)
+-   repo: local
+    hooks:
+    -   id: code-analysis
+        name: Code analysis
+        entry: ${buildout:bin-directory}/code-analysis
+        language: script
+        files: src/ploneintranet/(.*)
+        pass_filenames: false
