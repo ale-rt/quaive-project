@@ -30,6 +30,7 @@ CONF = {
     "python.linting.pylintEnabled": False,
     "python.linting.flake8Enabled": True,
     "python.linting.enabled": True,
+    "search.exclude": ["**/.vscode"],
 }
 
 print(dumps(CONF, indent=2))
