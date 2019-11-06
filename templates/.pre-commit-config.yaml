@@ -3,7 +3,7 @@ repos:
     rev: 19.3b0
     hooks:
     -   id: black
-        exclude: pre-commit/(.*)
+        exclude: (pre-commit|docs)/(.*)
 -   repo: local
     hooks:
     -   id: code-analysis
