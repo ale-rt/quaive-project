@@ -6,7 +6,7 @@ def robottest(name):
     """ Run the robot test matching "name"
     """
     api.local(
-        "./bin/robot -t '{}' src/ploneintranet/src/ploneintranet/suite/tests/acceptance/".format(  # noqa: E501
+        "./bin/robot --variable BROWSER:chrome -t '{}' src/ploneintranet/src/ploneintranet/suite/tests/acceptance/".format(  # noqa: E501
             name
         )
     )
