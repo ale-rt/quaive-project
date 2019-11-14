@@ -25,8 +25,7 @@ def robottestff(name):
 def robotserver():
     """ Run the ploneintranet robot server
     """
-    with api.lcd("~/Code/plone/projects/quaive"):
-        with api.prefix(". bin/activate"):
-            api.local(
-                "ZSERVER_HOST=127.0.0.2 ZSERVER_PORT=55001 DIAZO_ALWAYS_CACHE_RULES=1 ./bin/robot-server -dvvv -l ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT"  # noqa: E501
-            )
+    with api.prefix(". bin/activate"):
+        api.local(
+            "ZSERVER_HOST=127.0.0.2 ZSERVER_PORT=55001 DIAZO_ALWAYS_CACHE_RULES=1 ./bin/robot-server -dvvv -l ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT"  # noqa: E501
+        )
