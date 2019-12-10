@@ -10,7 +10,7 @@ bin/pip3.7:
 
 src/ploneintranet:
 	test -x src/ploneintranet || git clone git@github.com:quaive/ploneintranet.git src/ploneintranet
-	cd src/ploneintranet && git checkout plone52-nobuildout && git pull origin plone52-nobuildout && touch -mt `git log -1 --date=format:%Y%m%d%H%M.%S --pretty=format:%ad .` .
+	cd src/ploneintranet && git checkout python3 && git pull origin python3 && touch -mt `git log -1 --date=format:%Y%m%d%H%M.%S --pretty=format:%ad .` .
 
 src/ploneintranet/requirements.txt: src/ploneintranet
 
