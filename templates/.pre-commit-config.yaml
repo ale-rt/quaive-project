@@ -1,3 +1,4 @@
+fail_fast: true
 repos:
 -   repo: https://github.com/psf/black
     rev: 19.3b0
@@ -11,4 +12,5 @@ repos:
         entry: ${buildout:bin-directory}/code-analysis
         language: script
         files: src/ploneintranet/(.*)
+        exclude: (.*).(pt|xml|zcml)
         pass_filenames: false
