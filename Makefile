@@ -2,11 +2,11 @@
 
 all: .installed.cfg
 
-bin/buildout: bin/pip3.7 src/ploneintranet/requirements.txt
-	./bin/pip3.7 install -IUr src/ploneintranet/requirements.txt
+bin/buildout: bin/pip3.8 requirements.txt
+	./bin/pip3.8 install -IUr requirements.txt
 
-bin/pip3.7:
-	virtualenv -p python3.7 --no-site-packages .
+bin/pip3.8:
+	python3.8 -m venv .
 
 src/ploneintranet:
 	test -x src/ploneintranet || git clone git@github.com:quaive/ploneintranet.git src/ploneintranet
