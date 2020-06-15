@@ -5,7 +5,7 @@ from invoke import task
 def robottest(c, name):
     """ Run the robot test matching "name"
     """
-    c.run(
+    print(
         "ZSERVER_HOST=127.0.0.2 ZSERVER_PORT=55001 ./bin/robot --variable BROWSER:chrome -t '{}' src/ploneintranet/src/ploneintranet/suite/tests/acceptance/".format(  # noqa: E501
             name
         )
@@ -15,7 +15,7 @@ def robottest(c, name):
 def robottestff(c, name):
     """ Run the robot test matching "name"
     """
-    c.run(
+    print(
         "ZSERVER_HOST=127.0.0.2 ZSERVER_PORT=55001 ./bin/robot -t '{}' src/ploneintranet/src/ploneintranet/suite/tests/acceptance/".format(  # noqa: E501
             name
         )
