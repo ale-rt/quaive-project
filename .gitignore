@@ -1,6 +1,10 @@
 /.installed.cfg
 /.mr.developer.cfg
 /bin/
+/buildout.cfg
+/components/*/bin/
+/components/*/var/
+/custom.cfg
 /develop-eggs/
 /eggs/
 /include/
