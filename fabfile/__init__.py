@@ -27,5 +27,5 @@ def robotserver(c):
     """
     with c.prefix(". bin/activate"):
         c.run(
-            "ZSERVER_HOST=127.0.0.2 ZSERVER_PORT=55001 DIAZO_ALWAYS_CACHE_RULES=1 ./bin/robot-server -nvvv -l ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT"  # noqa: E501
+            "SOLR_BUILDOUT_DIR=$PWD/components/solr ZSERVER_HOST=127.0.0.2 ZSERVER_PORT=55001 DIAZO_ALWAYS_CACHE_RULES=1 ./bin/robot-server -nvvv -l ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT ploneintranet.suite.testing.PLONEINTRANET_SUITE_ROBOT"  # noqa: E501
         )
