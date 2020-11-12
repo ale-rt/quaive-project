@@ -12,4 +12,4 @@ py38/bin/pip3.8:
 
 .PHONY: clean
 clean:
-	rm -rf bin lib lib64 include share
+	rm -rf ./py38
