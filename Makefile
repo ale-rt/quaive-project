@@ -1,14 +1,14 @@
 .PHONY: all
 all: .installed.cfg
 
-py38/bin/buildout: py38/bin/pip3.8 requirements.txt
-	./py38/bin/pip3.8 install -IUr requirements.txt
+py27/bin/buildout: py27/bin/pip2.7 requirements.txt
+	./py27/bin/pip2.7 install -IUr requirements.txt
 
-py38/bin/pip3.8:
-	python3.8 -m venv py38
+py27/bin/pip2.7:
+	python2.7 -m venv py27
 
-.installed.cfg: py38/bin/buildout buildout.cfg
-	./py38/bin/buildout
+.installed.cfg: py27/bin/buildout buildout.cfg
+	./py27/bin/buildout
 
 .PHONY: upgrade
 upgrade:
@@ -16,7 +16,7 @@ upgrade:
 
 .PHONY: clean
 clean:
-	rm -rf ./py38
+	rm -rf ./py27
 
 .PHONY: graceful
 graceful: .installed.cfg
