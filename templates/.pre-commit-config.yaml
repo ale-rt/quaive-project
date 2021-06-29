@@ -14,3 +14,11 @@ repos:
         files: src/ploneintranet/(.*)
         exclude: (.*).(pt|xml|zcml)
         pass_filenames: false
+-   repo: https://github.com/myint/rstcheck
+    rev: master
+    hooks:
+    -   id: rstcheck
+        name: rstcheck
+        entry: rstcheck --ignore-messages "Duplicate explicit target name"
+        language: python
+        types: [rst]
