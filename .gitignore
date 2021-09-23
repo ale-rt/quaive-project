@@ -10,7 +10,10 @@
 /include/
 /lib/
 /local/
+/log.html
+/output.xml
 /py38/
+/report.html
 /share/
 /src/
 /var/
