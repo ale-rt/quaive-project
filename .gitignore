@@ -1,4 +1,4 @@
-/.installed.cfg
+.installed.cfg
 /.mr.developer.cfg
 /bin/
 /buildout.cfg
@@ -10,8 +10,8 @@
 /include/
 /lib/
 /local/
-/parts/
 /py38/
 /share/
 /src/
 /var/
+parts/
