@@ -9,6 +9,8 @@ py38/bin/pip3.8:
 
 .installed.cfg: py38/bin/buildout $(wildcard *.cfg config/*.cfg profiles/*.cfg)
 	./py38/bin/buildout
+	cd components/zeo && make
+	cd components/solr && make
 
 .PHONY: upgrade
 upgrade:
