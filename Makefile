@@ -20,6 +20,10 @@ upgrade:
 clean:
 	rm -rf ./py38
 
+.PHONY: read_registry
+read_registry: .installed.cfg
+	./bin/instance run scripts/read_registry.py etc/registry/*.xml
+
 .PHONY: graceful
 graceful: .installed.cfg
 	./bin/supervisord 2> /dev/null || ( \
