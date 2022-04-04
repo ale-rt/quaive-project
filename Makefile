@@ -1,5 +1,5 @@
 .PHONY: all
-all: .installed.cfg
+all: .installed.cfg src/ploneintranet/.pre-commit-config.yaml
 
 py38/bin/buildout: py38/bin/pip3.8 requirements.txt
 	./py38/bin/pip3.8 install -IUr requirements.txt
@@ -11,6 +11,9 @@ py38/bin/pip3.8:
 	./py38/bin/buildout
 	cd components/zeo && make
 	cd components/solr && make
+
+src/ploneintranet/.pre-commit-config.yaml: py38/bin/buildout templates/.pre-commit-config.yaml
+	./py38/bin/buildout install pre_commit
 
 .PHONY: upgrade
 upgrade:
