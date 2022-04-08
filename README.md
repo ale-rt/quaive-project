@@ -1,3 +1,5 @@
+Example:
+```
 [buildout]
 extends =
     config/base.cfg
@@ -8,3 +10,4 @@ http-address = 8120
 [settings]
 solr_port = 8131
 zeo_address = ${buildout:directory}/components/zeo/var/zeo.socket
+```
