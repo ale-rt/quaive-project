@@ -1,23 +1,23 @@
 fail_fast: true
 repos:
--   repo: https://github.com/psf/black
+  - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:
-    -   id: black
+      - id: black
         exclude: (pre-commit|docs)/(.*)
--   repo: local
+  - repo: local
     hooks:
-    -   id: code-analysis
+      - id: code-analysis
         name: Code analysis
         entry: ${buildout:bin-directory}/code-analysis
         language: script
         files: src/ploneintranet/(.*)
         exclude: (.*).(pt|xml|zcml)
         pass_filenames: false
--   repo: https://github.com/myint/rstcheck
+  - repo: https://github.com/myint/rstcheck
     rev: v6.0.0.post1
     hooks:
-    -   id: rstcheck
+      - id: rstcheck
         name: rstcheck
         entry: rstcheck --ignore-messages "Duplicate explicit target name"
         language: python
