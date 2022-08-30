@@ -1,2 +1,2 @@
--r https://dist.plone.org/release/5.2.11/requirements.txt
-pdbpp==0.10.3
+-r https://dist.plone.org/release/6.0.3/requirements.txt
+pdbpp

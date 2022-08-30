@@ -1,2 +1,2 @@
 all:
-	../../py38/bin/buildout -Nt 2
+	../../py3/bin/buildout -Nt 2
