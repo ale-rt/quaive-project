@@ -1,5 +1,14 @@
 fail_fast: true
 repos:
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.3.1
+    hooks:
+      - id: pyupgrade
+        args: [--py38-plus]
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+        - id: isort
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:
@@ -22,3 +31,17 @@ repos:
         entry: rstcheck --ignore-messages "Duplicate explicit target name"
         language: python
         types: [rst]
+  - repo: https://github.com/collective/zpretty
+    rev: 3.0.3
+    hooks:
+      - id: zpretty
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.2
+    hooks:
+      - id: codespell
+        additional_dependencies:
+          - tomli
