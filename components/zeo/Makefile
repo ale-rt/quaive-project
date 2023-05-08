@@ -1,2 +1,2 @@
 all:
-	../../py3/bin/buildout -Nt 2
+	../../.venv/bin/buildout -Nt 2
