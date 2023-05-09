@@ -2,7 +2,7 @@
 fail_fast: true
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.4.0
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
@@ -11,7 +11,7 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: 22.3.0
+    rev: 23.3.0
     hooks:
       - id: black
         exclude: (pre-commit|docs)/(.*)
@@ -25,7 +25,7 @@ repos:
         exclude: (.*).(pt|xml|zcml)
         pass_filenames: false
   - repo: https://github.com/myint/rstcheck
-    rev: v6.0.0.post1
+    rev: v6.1.2
     hooks:
       - id: rstcheck
         name: rstcheck
@@ -33,7 +33,7 @@ repos:
         language: python
         types: [rst]
   - repo: https://github.com/collective/zpretty
-    rev: 3.0.3
+    rev: 3.1.0a1
     hooks:
       - id: zpretty
   - repo: https://github.com/PyCQA/flake8
