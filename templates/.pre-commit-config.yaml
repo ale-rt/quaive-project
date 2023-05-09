@@ -1,27 +1,20 @@
+---
 fail_fast: true
 repos:
-  - repo: https://github.com/psf/black
-    rev: 22.3.0
-    hooks:
-      - id: black
-        exclude: (pre-commit|docs)/(.*)
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.4.0
     hooks:
-    -   id: pyupgrade
+      - id: pyupgrade
         args: [--py38-plus]
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
-    -   id: isort
-  - repo: https://github.com/collective/zpretty
-    rev: 3.0.1
+      - id: isort
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
     hooks:
-    -   id: zpretty
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
-    hooks:
-    -   id: flake8
+      - id: black
+        exclude: (pre-commit|docs)/(.*)
   - repo: local
     hooks:
       - id: code-analysis
@@ -32,10 +25,24 @@ repos:
         exclude: (.*).(pt|xml|zcml)
         pass_filenames: false
   - repo: https://github.com/myint/rstcheck
-    rev: v6.0.0.post1
+    rev: v6.1.2
     hooks:
       - id: rstcheck
         name: rstcheck
         entry: rstcheck --ignore-messages "Duplicate explicit target name"
         language: python
         types: [rst]
+  - repo: https://github.com/collective/zpretty
+    rev: 3.1.0a1
+    hooks:
+      - id: zpretty
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+        additional_dependencies:
+          - tomli
