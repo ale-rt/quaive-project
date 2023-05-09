@@ -1,20 +1,20 @@
 .PHONY: all
 all: .installed.cfg src/ploneintranet/.pre-commit-config.yaml
 
-py38/bin/buildout: py38/bin/pip3.8 requirements.txt
-	./py38/bin/pip3.8 uninstall -y setuptools
-	./py38/bin/pip3.8 install -IUr requirements.txt
+.venv/bin/buildout: .venv/bin/pip3 requirements.txt
+	./.venv/bin/pip3 uninstall -y setuptools
+	./.venv/bin/pip3 install -IUr requirements.txt
 
-py38/bin/pip3.8:
-	python3.8 -m venv py38
+.venv/bin/pip3:
+	python3 -m venv .venv
 
-.installed.cfg: py38/bin/buildout $(wildcard *.cfg config/*.cfg profiles/*.cfg)
-	./py38/bin/buildout
+.installed.cfg: .venv/bin/buildout $(wildcard *.cfg config/*.cfg profiles/*.cfg)
+	./.venv/bin/buildout
 	cd components/zeo && make
 	cd components/solr && make
 
-src/ploneintranet/.pre-commit-config.yaml: py38/bin/buildout templates/.pre-commit-config.yaml
-	./py38/bin/buildout install pre_commit
+src/ploneintranet/.pre-commit-config.yaml: .venv/bin/buildout templates/.pre-commit-config.yaml
+	./.venv/bin/buildout install pre_commit
 
 .PHONY: upgrade
 upgrade:
@@ -22,7 +22,7 @@ upgrade:
 
 .PHONY: clean
 clean:
-	rm -rf ./py38
+	rm -rf ./.venv
 
 .PHONY: read_registry
 read_registry: .installed.cfg
