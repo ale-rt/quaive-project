@@ -38,3 +38,8 @@ graceful: .installed.cfg
 			sleep 30; \
 		done \
 	)
+
+.PHONY: update_repo
+update_repo:
+	cp src/ploneintranet/buildout.d/versions.cfg config/versions.cfg
+	cp src/ploneintranet/requirements.txt requirements.txt
