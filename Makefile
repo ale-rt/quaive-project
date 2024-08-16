@@ -12,6 +12,12 @@ all: .installed.cfg src/ploneintranet/.pre-commit-config.yaml
 	./.venv/bin/buildout
 	cd components/zeo && make
 	cd components/solr && make
+	make fix-zopepy
+
+.PHONY: fix-zopepy
+fix-zopepy:
+	# This is needed to use zopepy as the python interpreter for the workspace in vscode
+	[ -e bin/zopepy ] && sed -i 's|ic:m|iIc:m|g' bin/zopepy
 
 src/ploneintranet/.pre-commit-config.yaml: .venv/bin/buildout templates/.pre-commit-config.yaml
 	./.venv/bin/buildout install pre_commit
