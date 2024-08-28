@@ -15,15 +15,6 @@ repos:
     hooks:
       - id: black
         exclude: (pre-commit|docs)/(.*)
-  - repo: local
-    hooks:
-      - id: code-analysis
-        name: Code analysis
-        entry: ${buildout:bin-directory}/code-analysis
-        language: script
-        files: src/ploneintranet/(.*)
-        exclude: (.*).(pt|xml|zcml)
-        pass_filenames: false
   - repo: https://github.com/myint/rstcheck
     rev: v6.1.2
     hooks:
@@ -46,3 +37,12 @@ repos:
       - id: codespell
         additional_dependencies:
           - tomli
+  - repo: local
+    hooks:
+      - id: code-analysis
+        name: Code analysis
+        entry: ${buildout:bin-directory}/code-analysis
+        language: script
+        files: src/ploneintranet/(.*)
+        exclude: (.*).(pt|xml|zcml)
+        pass_filenames: false
