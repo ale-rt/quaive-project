@@ -1,1 +1,12 @@
--r https://dist.plone.org/release/6.0.12/requirements.txt
+Plone
+ZEO
+supervisor
+plone.recipe.zope2instance
+ploneintranet
+collective.pdbpp
+collective.icecream
+collective.relationhelpers
+plone.app.debugtoolbar
+plone.reload
+-e /home/ale/Code/plone/projects/quaive-ansible/src/plonintranet
+-e /home/ale/Code/plone/projects/quaive-ansible/src/quaive.resourves.ploneintranet
