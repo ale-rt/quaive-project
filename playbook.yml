@@ -3,13 +3,25 @@
   hosts:
     - localhost
   connection: local
+
+  vars:
+    deploy_plone_target: '{{ ansible_env.PWD }}'
+    deploy_plone_ansible_etc_dir: '{{ ansible_env.PWD }}/etc/ansible'
+    deploy_plone_version: '6.0.12'
+    deploy_plone_python: '3.8'
+    deploy_plone_instances:
+      - name: 'instance'
+        http_port: 8121
+        skip_supervisor: true
+    local_celery_package: ploneintranet.asynctasks.celerytasks
   roles:
     - role: collective.plonestack.deploy_plone
-      vars:
-        deploy_plone_target: '{{ ansible_env.PWD }}'
-        deploy_plone_ansible_etc_dir: '{{ ansible_env.PWD }}/etc/ansible'
-        deploy_plone_version: '6.0.12'
-        deploy_plone_python: '3.8'
-        deploy_plone_instances:
-          - name: 'instance'
-            http_port: 8121
+
+  tasks:
+    - name: "Add Celery supervisor snippet"
+      ansible.builtin.template:
+        src: 'templates/etc/supervisord.d/celery.conf.j2'
+        dest: '{{ deploy_plone_target }}/etc/supervisord.d/celery.conf'
+        mode: '0644'
+      tags:
+        - celery

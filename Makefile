@@ -1,5 +1,5 @@
 .PHONY: all
-all: ansible_requirements .installed.cfg src/ploneintranet/.pre-commit-config.yaml
+all: ansible_requirements src/ploneintranet/.pre-commit-config.yaml
 
 .PHONY: ansible_requirements
 ansible_requirements: .venv/bin/ansible-playbook
@@ -14,22 +14,11 @@ ansible_requirements: .venv/bin/ansible-playbook
 .venv/bin/uv: .venv/bin/pip3
 	.venv/bin/pip install uv
 
-.installed.cfg: .venv/bin/buildout $(wildcard *.cfg config/*.cfg profiles/*.cfg)
-	./.venv/bin/buildout
-	cd components/zeo && make
-	cd components/solr && make
-	make fix-zopepy
-
-.PHONY: fix-zopepy
-fix-zopepy:
-	# This is needed to use zopepy as the python interpreter for the workspace in vscode
-	[ -e bin/zopepy ] && sed -i 's|ic:m|iIc:m|g' bin/zopepy
-
 .venv/bin/ansible-playbook: .venv/bin/uv
 	./.venv/bin/uv pip install ansible
 
 src/ploneintranet/.pre-commit-config.yaml: .venv/bin/buildout templates/.pre-commit-config.yaml
-	./.venv/bin/buildout install code-analysis pre_commit_config pre_commit 
+	./.venv/bin/buildout install code-analysis pre_commit_config pre_commit
 
 .PHONY: upgrade
 upgrade:

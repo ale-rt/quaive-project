@@ -1,0 +1,6 @@
+[program:celery]
+command = {{ deploy_plone_target }}/bin/celery -A {{ local_celery_package }} worker
+process_name = celery
+directory = {{ deploy_plone_target }}/var/
+priority = 30
+redirect_stderr = true
