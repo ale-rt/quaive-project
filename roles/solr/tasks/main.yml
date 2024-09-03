@@ -1,0 +1,154 @@
+---
+- name: 'Check if we already have solr'
+  ansible.builtin.stat:
+    path: '{{ deploy_plone_target }}/var/cache/solr-5.5.5.zip'
+  register: solr_downloaded
+  tags:
+    - solr
+
+- name: 'Download solr if it is not there yet'
+  ansible.builtin.get_url:
+    url: https://archive.apache.org/dist/lucene/solr/5.5.5/solr-5.5.5.zip
+    dest: '{{ deploy_plone_target }}/var/cache/solr-5.5.5.zip'
+    mode: '0644'
+  when:
+    - not solr_downloaded.stat.exists
+  tags:
+    - solr
+
+- name: 'Unpack solr'
+  ansible.builtin.unarchive:
+    src: '{{ deploy_plone_target }}/var/cache/solr-5.5.5.zip'
+    dest: '{{ deploy_plone_target }}/parts'
+    remote_src: true
+    creates: '{{ deploy_plone_target }}/parts/solr-5.5.5'
+  tags:
+    - solr
+
+- name: 'Copy the solr server folder'
+  ansible.builtin.command:
+    cmd: 'cp -r {{ deploy_plone_target }}/parts/solr-5.5.5/server {{ deploy_plone_target }}/parts/{{ item }}'
+    creates: '{{ deploy_plone_target }}/parts/{{ item }}'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Copy the contrib folder'
+  ansible.builtin.copy:
+    src: '{{ deploy_plone_target }}/parts/solr-5.5.5/contrib'
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}'
+    remote_src: true
+    mode: '0755'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Copy the dist folder'
+  ansible.builtin.copy:
+    src: '{{ deploy_plone_target }}/parts/solr-5.5.5/dist'
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}'
+    remote_src: true
+    mode: '0755'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the log4j properties file'
+  ansible.builtin.template:
+    src: 'templates/log4j.properties.j2'
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}/etc/log4j.properties'
+    mode: '0644'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the logging.properties file'
+  ansible.builtin.template:
+    src: 'templates/logging.properties.j2'
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}/etc/logging.properties'
+    mode: '0644'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the solr core1 folder'
+  ansible.builtin.file:
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}/solr/core1'
+    state: directory
+    mode: '0755'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the solr core.properties file'
+  ansible.builtin.copy:
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}/solr/core1/core.properties'
+    content: 'name=core1'
+    mode: '0644'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the solr core1 conf folder'
+  ansible.builtin.file:
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}/solr/core1/conf'
+    state: directory
+    mode: '0755'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the solr core1 conf lang folder'
+  ansible.builtin.file:
+    dest: '{{ deploy_plone_target }}/parts/{{ item }}/solr/core1/conf/lang'
+    state: directory
+    mode: '0755'
+  loop:
+    - solr
+    - solr-test
+  tags:
+    - solr
+
+- name: 'Create the solr core1 schema.xml file'
+  ansible.builtin.template:
+    dest: '{{ deploy_plone_target }}/parts/{{ item.0 }}/solr/core1/conf/{{ item.1 }}'
+    src: 'templates/core/conf/{{ item.1 }}.j2'
+    mode: '0644'
+  with_nested:
+    - - solr
+      - solr-test
+    - - 'schema.xml'
+      - 'lang/stopwords_en.txt'
+      - 'solrconfig.xml'
+      - 'protwords.txt'
+      - 'synonyms.txt'
+      - 'managed-schema'
+      - '_rest_managed.json'
+      - 'stopwords.txt'
+      - 'currency.xml'
+  tags:
+    - solr
+
+- name: 'Add solr to supervisor'
+  ansible.builtin.template:
+    src: 'templates/etc/supervisord.d/solr.conf.j2'
+    dest: '{{ deploy_plone_target }}/etc/supervisord.d/solr.conf'
+    mode: '0644'
+  tags:
+    - solr

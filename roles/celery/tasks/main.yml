@@ -1,0 +1,8 @@
+---
+- name: "Add the celery task to superviror"
+  ansible.builtin.template:
+    src: 'templates/etc/supervisord.d/celery.conf.j2'
+    dest: '{{ deploy_plone_target }}/etc/supervisord.d/celery.conf'
+    mode: '0644'
+  tags:
+    - celery

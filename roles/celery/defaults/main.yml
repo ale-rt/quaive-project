@@ -1,0 +1,2 @@
+---
+local_celery_package: ploneintranet.asynctasks.celerytasks

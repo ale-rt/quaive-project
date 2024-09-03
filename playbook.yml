@@ -13,15 +13,8 @@
       - name: 'instance'
         http_port: 8121
         skip_supervisor: true
-    local_celery_package: ploneintranet.asynctasks.celerytasks
+    local_solr_port: '8131'
   roles:
     - role: collective.plonestack.deploy_plone
-
-  tasks:
-    - name: "Add Celery supervisor snippet"
-      ansible.builtin.template:
-        src: 'templates/etc/supervisord.d/celery.conf.j2'
-        dest: '{{ deploy_plone_target }}/etc/supervisord.d/celery.conf'
-        mode: '0644'
-      tags:
-        - celery
+    - role: solr
+    - role: celery

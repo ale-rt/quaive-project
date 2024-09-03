@@ -1,0 +1,6 @@
+[program:solr]
+command = /usr/bin/env java -Xms512m -Xmx2048m -jar start.jar --module=http jetty.host={{ local_solr_host }} jetty.port={{ local_solr_port }}
+process_name = solr
+directory = {{ deploy_plone_target }}/parts/solr/server
+priority = 20
+redirect_stderr = true
