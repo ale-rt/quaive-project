@@ -2,7 +2,7 @@ Plone
 ZEO
 supervisor
 plone.recipe.zope2instance
-ploneintranet
+ploneintranet [test]
 collective.pdbpp
 collective.icecream
 collective.relationhelpers
