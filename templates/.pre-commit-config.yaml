@@ -24,7 +24,7 @@ repos:
         language: python
         types: [rst]
   - repo: https://github.com/collective/zpretty
-    rev: 3.1.0a1
+    rev: 3.1.0
     hooks:
       - id: zpretty
   - repo: https://github.com/PyCQA/flake8
@@ -37,6 +37,7 @@ repos:
       - id: codespell
         additional_dependencies:
           - tomli
+        exclude: src/ploneintranet/core/locales/.*
   - repo: local
     hooks:
       - id: code-analysis
