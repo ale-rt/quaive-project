@@ -1,0 +1,49 @@
+name: Bump Plone version
+pipelineid: plone61
+
+scms:
+    default:
+        kind: github
+        spec:
+            owner: ale-rt
+            repository: quaive-project
+            token: "dsas"
+
+actions:
+    default:
+        title: 'deps: bump updatecli version to {{ source "coredevVersion" }}'
+        kind: github/pullrequest
+        spec:
+            automerge: false
+        scmid: default
+sources:
+    coredevVersion:
+        name: "Get the latest 6.1 tag from plone/buildout.coredev"
+        kind: gittag
+        spec:
+            url: https://github.com/plone/buildout.coredev.git
+            versionfilter:
+                # This ensures we only get tags that are 6.1.x, even release candidates
+                kind: regex
+                # This ensures we only get the latest tag
+                # kind: semver
+                pattern: "6.1.*"
+targets:
+    buildout:
+        name: Update Plone version in buildout.d/base.cfg
+        kind: file
+        spec:
+            files:
+                - config/base.cfg
+                - requirements.txt
+                - components/zeo/config/base.cfg
+            matchpattern: "dist.plone.org/release/([0-9a-z]|\\.)*"
+            replacepattern: 'dist.plone.org/release/{{ source "coredevVersion" }}'
+        sourceid: coredevVersion
+
+    copyPloneIntranet:
+        name: Update PloneIntranet version in src/ploneintranet/buildout.d/versions.cfg
+        kind: shell
+        spec:
+            command: "cp src/ploneintranet/buildout.d/versions.cfg config/versions.cfg #"
+        sourceid: coredevVersion

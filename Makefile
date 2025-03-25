@@ -20,7 +20,7 @@ fix-zopepy:
 	[ -e bin/zopepy ] && sed -i 's|ic:m|iIc:m|g' bin/zopepy
 
 src/ploneintranet/.pre-commit-config.yaml: .venv/bin/buildout templates/.pre-commit-config.yaml
-	./.venv/bin/buildout install code-analysis pre_commit_config pre_commit 
+	./.venv/bin/buildout install code-analysis pre_commit_config pre_commit
 
 .PHONY: upgrade
 upgrade:
@@ -49,3 +49,7 @@ graceful: .installed.cfg
 update_repo:
 	cp src/ploneintranet/buildout.d/versions.cfg config/versions.cfg
 	cp src/ploneintranet/requirements.txt requirements.txt
+
+.PHONY: updatecli
+updatecli:
+	updatecli apply
