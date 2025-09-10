@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:solr="http://namespaces.ploneintranet.org/search/solr"
+    >
+
+  <include package="ploneintranet.search.solr" />
+  <solr:connection
+      basepath="/solr"
+      core="core1"
+      host="0.0.0.0"
+      port="{{ options.context.options['solr_port'] }}"
+      />
+
+</configure>

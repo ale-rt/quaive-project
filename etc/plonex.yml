@@ -1,0 +1,53 @@
+---
+plonex_version: 0.1.0
+plone_version: 6.2-latest
+plonex_base_constraint: "{{ target }}/constraints.txt"
+log_level: info
+pip_requirements:
+    - ploneintranet
+    - rich
+    - supervisor
+    - ZEO
+environment_vars:
+    TZ: Europe/Rome
+
+    zope_i18n_allowed_languages: '{{ environment_vars["PTS_LANGUAGES"] }}'
+    zope_i18n_compile_mo_files: true
+
+    CHAMELEON_RELOAD: true
+    CHAMELEON_DEBUG: true
+
+    PYTHONWARNINGS: ignore::DeprecationWarning,ignore::UserWarning
+    ASYNC_ENABLED: "true"
+    BROKER_URL: "redis://localhost:6379/0"
+    CELERY_RESULT_BACKEND: "redis://localhost:6379/0"
+    DIAZO_ALWAYS_CACHE_RULES: "true"
+    PTS_LANGUAGES: "en de it"
+    LIBREOFFICE_SYSUSERCONFIG: "{{ target }}/var/config"
+    CHAMELEON_CACHE: "{{ target }}/var/cache"
+    PYTHON_BASIC_REPL: 1
+    UPGRADE_ZOPE_URL: "http://localhost:{{ http_port }}"
+    UPGRADE_TEMPFILE_AUTH_DIR: "{{ target }}/var/ftw.upgrade-authentication"
+zcml_additional:
+  - "{{ target }}/templates/zope_additional-overrides.zcml.j2"
+services:
+    - template:
+        run_for: supervisor
+        source_path: resource://plonex.services.supervisor.templates:program.conf.j2
+        target_path: "{{ target }}/tmp/supervisor/etc/supervisor/zeoserver.conf"
+        options:
+            program: zeoserver
+            command: plonex db start
+            process_name: zeoserver
+            directory: "{{ target }}"
+            priority: 1
+    - template:
+        run_for: supervisor
+        source_path: resource://plonex.services.supervisor.templates:program.conf.j2
+        target_path: "{{ target }}/tmp/supervisor/etc/supervisor/celery.conf"
+        options:
+            program: celery
+            command: .venv/bin/celery -A ploneintranet.asynctasks.celerytasks worker
+            process_name: celery
+            directory: "{{ target }}"
+            priority: 30

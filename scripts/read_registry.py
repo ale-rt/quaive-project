@@ -7,8 +7,9 @@ import sys
 
 sites = app.objectValues("Plone Site")  # noqa:F821
 
+print(sys.argv[4:])
 
-for filename in sys.argv[3:]:
+for filename in sys.argv[4:]:
     for site in sites:
         setSite(site)
         importer = RegistryImporter(site.portal_registry, FakeEnv())

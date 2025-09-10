@@ -7,7 +7,7 @@
 /custom.cfg
 /develop-eggs/
 /eggs/
-/etc
+/etc/registry
 /include/
 /lib/
 /local/
@@ -17,5 +17,7 @@
 /report.html
 /share/
 /src/
+/tmp/
 /var/
 parts/
+*.local.*

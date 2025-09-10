@@ -1,10 +1,15 @@
-[project]
-name = "quaive-project"
-version = "0.1.0"
-description = "A project that manages Quaive"
-readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
-
 [tool.uv]
-package = false
+index-strategy = "unsafe-best-match"
+
+[[tool.uv.index]]
+name = "quaive"
+url = "https://pypi.quaive.net/simple"
+
+[[tool.uv.index]]
+name = "spypi"
+url = "https://spypi.syslab.com/simple"
+
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"

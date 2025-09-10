@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:db="http://namespaces.zope.org/db"
+    >
+
+  <include
+      package="z3c.saconfig"
+      file="meta.zcml"
+      />
+
+  <db:engine
+      name="ploneintranet_notifications"
+      echo="false"
+      url="sqlite:////{{ options.context.target }}/var/notification.sql"
+      />
+
+  <db:session
+      name="ploneintranet_notifications"
+      engine="ploneintranet_notifications"
+      />
+
+</configure>

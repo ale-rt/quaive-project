@@ -1,0 +1,32 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <configure
+      xmlns="http://namespaces.zope.org/zope"
+      xmlns:db="http://namespaces.zope.org/db"
+      xmlns:solr="http://namespaces.ploneintranet.org/search/solr"
+      >
+
+    <include package="ploneintranet.search.solr" />
+    <solr:connection
+        basepath="/solr"
+        core="core1"
+        host="0.0.0.0"
+        port="{{ solr_port | default('8983') }}"
+        />
+
+    <include
+        package="z3c.saconfig"
+        file="meta.zcml"
+        />
+    <db:engine
+        name="ploneintranet_notifications"
+        echo="false"
+        url="sqlite:///{{ options['context'].target }}/var/notification.sql"
+        />
+    <db:session
+        name="ploneintranet_notifications"
+        engine="ploneintranet_notifications"
+        />
+
+  </configure>
+</configure>

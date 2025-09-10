@@ -1,0 +1,2 @@
+# Packages added by plonex install
+collective.impersonate
