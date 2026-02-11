@@ -1,5 +1,5 @@
 .PHONY: all
-all: .installed.cfg src/ploneintranet/.pre-commit-config.yaml  ## install everything
+all: .installed.cfg ## install everything
 
 .venv/bin/buildout: .venv/bin/pip3 requirements.txt
 	./.venv/bin/pip3 uninstall -y setuptools
@@ -18,10 +18,6 @@ all: .installed.cfg src/ploneintranet/.pre-commit-config.yaml  ## install everyt
 fix-zopepy:
 	# This is needed to use zopepy as the python interpreter for the workspace in vscode
 	[ -e bin/zopepy ] && sed -i 's|ic:m|iIc:m|g' bin/zopepy
-
-src/ploneintranet/.pre-commit-config.yaml: .venv/bin/buildout templates/.pre-commit-config.yaml
-	./.venv/bin/buildout install code-analysis pre_commit_config pre_commit
-
 
 ##
 ## Maintanance tasks:
