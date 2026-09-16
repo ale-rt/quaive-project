@@ -1,12 +1,15 @@
 .PHONY: all
 all: .installed.cfg ## install everything
 
-.venv/bin/buildout: .venv/bin/pip3 requirements.txt
-	./.venv/bin/pip3 uninstall -y setuptools
-	./.venv/bin/pip3 install -IUr requirements.txt
+.venv/bin/buildout: .venv/bin/uv requirements.txt
+	./.venv/bin/uv pip install -r requirements.txt
 
 .venv/bin/pip3:
-	python3 -m venv .venv
+	# Uses the .python-version file
+	uv venv --seed
+
+.venv/bin/uv: .venv/bin/pip3
+	.venv/bin/pip3 install uv
 
 .installed.cfg: .venv/bin/buildout $(wildcard *.cfg config/*.cfg profiles/*.cfg)
 	./.venv/bin/buildout

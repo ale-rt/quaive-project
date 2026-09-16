@@ -1,0 +1,10 @@
+[project]
+name = "quaive-project"
+version = "0.1.0"
+description = "A project that manages Quaive"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[tool.uv]
+package = false
