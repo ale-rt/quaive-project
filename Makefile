@@ -64,10 +64,6 @@ update_repo:  ## Update the repository to the latest version coming from plonein
 	cp src/ploneintranet/buildout.d/versions.cfg config/versions.cfg
 	cp src/ploneintranet/buildout.d/constraints.txt constraints.txt
 
-.PHONY: updatecli
-updatecli:  ## Run updatecli to update the repository
-	updatecli apply
-
 ##
 ## Obtaining help:
 
