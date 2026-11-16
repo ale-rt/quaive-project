@@ -62,7 +62,7 @@ graceful: .installed.cfg  ## Gracefully restart the supervisor managed processes
 .PHONY: update_repo
 update_repo:  ## Update the repository to the latest version coming from ploneintranet
 	cp src/ploneintranet/buildout.d/versions.cfg config/versions.cfg
-	cp src/ploneintranet/requirements.txt requirements.txt
+	cp src/ploneintranet/buildout.d/constraints.txt constraints.txt
 
 .PHONY: updatecli
 updatecli:  ## Run updatecli to update the repository
